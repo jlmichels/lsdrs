@@ -8,7 +8,6 @@ function App() {
         <h1>LSDRS</h1>
         Laboratory Sample Drop-off/Reception System
       </header>
-      <Login/>
     </div>
   );
 }
