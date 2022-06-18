@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 function App() {
   return (
@@ -8,7 +8,35 @@ function App() {
         <h1>LSDRS</h1>
         Laboratory Sample Drop-off/Reception System
       </header>
+      <Login/>
     </div>
+  );
+}
+
+function Login() {
+  return (
+    <form action ="/login" method="post" id="login">
+      <Username/>
+      <Password/>
+    </form>
+  );
+}
+
+function Username() {
+  return (
+    <React.Fragment>
+      <label>Username:</label>
+      <input type="text" id="username" placeholder="Enter username"/>
+    </React.Fragment>
+  );
+}
+
+function Password() {
+  return (
+    <React.Fragment>
+      <label>Password:</label>
+      <input type="text" id="password" placeholder="Enter password"/>
+    </React.Fragment>
   );
 }
 
