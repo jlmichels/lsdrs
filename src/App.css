@@ -2,7 +2,15 @@
   text-align: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form, label {
+  margin-top: 20px;
+}
+
 input {
-  display: block;
   margin: auto;
 }
