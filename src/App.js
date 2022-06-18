@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import ListSamples from './listSamples';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         <h1>LSDRS</h1>
         Laboratory Sample Drop-off/Reception System
       </header>
+      <ListSamples/>
     </div>
   );
 }
