@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express()
 const port = 3001
+const pool = require('./db.js');
 
-app.get('/', (req, res) => {
-    res.status(200).send('express test');
+app.get('/', async (req, res) => {
+    try {
+        const allSamples = await pool.query("SELECT * FROM samples");
+        res.send(allSamples);
+    } catch (err) {
+        console.error(err.message);
+    }
 })
 
 app.listen(port, () => {
