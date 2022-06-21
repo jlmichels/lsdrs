@@ -4,7 +4,7 @@ const app = express()
 const port = 3001
 
 app.get('/', (req, res) => {
-    console.log("env is " + process.env.TEST1);
+    /* Using .env variables: process.env.TEST1 */
     res.status(200).send('express test');
 })
 
