@@ -1,9 +1,10 @@
 const express = require('express');
+require('dotenv').config({ path: './.env' });
 const app = express()
 const port = 3001
 
 app.get('/', (req, res) => {
-    console.log(process.env.REACT_APP_TEST1);
+    console.log("env is " + process.env.TEST1);
     res.status(200).send('express test');
 })
 
