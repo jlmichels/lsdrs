@@ -19,8 +19,7 @@ const ListSamples = () => {
 
     return (
         <Fragment>
-            Listing Samples 123
-            <table>
+            <table className="table table-sm">
                 <thead>
                     <tr>
                         <th>User</th>
@@ -37,7 +36,7 @@ const ListSamples = () => {
                         <td>{sample.user_id}</td>
                         <td>{sample.material}</td>
                         <td>{sample.lot}</td>
-                        <td>{sample.quantity} + "g"</td>
+                        <td>{sample.quantity}</td>
                         <td>{sample.status}</td>
                         <td>{sample.timestamp}</td>
                     </tr>
