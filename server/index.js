@@ -6,7 +6,7 @@ const pool = require('./db.js');
 app.get('/', async (req, res) => {
     try {
         const allSamples = await pool.query("SELECT * FROM samples");
-        res.send(allSamples);
+        res.send(allSamples.rows);
     } catch (err) {
         console.error(err.message);
     }
