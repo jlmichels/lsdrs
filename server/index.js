@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express()
+const cors = require('cors');
 const port = 3001
 const pool = require('./db.js');
+
+app.use(cors());
 
 app.get('/', async (req, res) => {
     try {
