@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import ListSamples from './listSamples';
+import ListSamples from './components/listSamples';
 
 function App() {
   return (
