@@ -9,6 +9,16 @@ const ListSamples = () => {
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
+    
+    const handleAccept = () => {
+        /* update status to accepted */
+        setShowModal(false);
+    }
+    
+    const handleReject = () => {
+        /* update status to rejected */
+        setShowModal(false);
+    }
 
     const getSamples = async() => {
         try {
@@ -59,15 +69,31 @@ const ListSamples = () => {
 
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Sample Reception</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>Accept or Reject the selected sample
+                    <table className="table table-hover table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>User</th>
+                                <th>Material</th>
+                                <th>Lot</th>
+                                <th>Quantity (grams)</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
+                <Button variant="success" onClick={handleAccept}>
+                    Accept
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Save Changes
+                <Button variant="danger" onClick={handleReject}>
+                    Reject
+                </Button>
+                <Button variant="secondary" onClick={handleClose}>
+                    Cancel
                 </Button>
                 </Modal.Footer>
             </Modal>
