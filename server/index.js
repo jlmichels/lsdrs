@@ -8,7 +8,7 @@ app.use(cors());
 
 app.get('/', async (req, res) => {
     try {
-        const allSamples = await pool.query("SELECT * FROM samples");
+        const allSamples = await pool.query("SELECT * FROM samples WHERE status='pending'");
         res.send(allSamples.rows);
     } catch (err) {
         console.error(err.message);

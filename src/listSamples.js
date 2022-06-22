@@ -15,6 +15,7 @@ const ListSamples = () => {
         }
     }
 
+    /* Modify how often getSamples called */
     getSamples();
 
     return (
