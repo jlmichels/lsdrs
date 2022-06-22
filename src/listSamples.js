@@ -19,26 +19,28 @@ const ListSamples = () => {
 
     return (
         <Fragment>
-            <table className="table table-sm">
+            <table className="table table-hover table-bordered table-sm">
                 <thead>
                     <tr>
+                        <th>Date</th>
+                        <th>Time</th>
                         <th>User</th>
                         <th>Material</th>
                         <th>Lot</th>
-                        <th>Quantity</th>
+                        <th>Quantity (grams)</th>
                         <th>Status</th>
-                        <th>Timestamp</th>
                     </tr>
                 </thead>
             <tbody>
                 {samples.map(sample => (
                     <tr key={sample.sample_id}>
+                        <td>{sample.timestamp.slice(0, 10)}</td>
+                        <td>{sample.timestamp.slice(11, 16)}</td>
                         <td>{sample.user_id}</td>
                         <td>{sample.material}</td>
                         <td>{sample.lot}</td>
                         <td>{sample.quantity}</td>
                         <td>{sample.status}</td>
-                        <td>{sample.timestamp}</td>
                     </tr>
                 ))}
             </tbody>
