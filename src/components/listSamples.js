@@ -1,9 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 /* useEffect once buttons added */
 
 const ListSamples = () => {
 
     const [samples, setSamples] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     const getSamples = async() => {
         try {
@@ -39,7 +44,7 @@ const ListSamples = () => {
                 </thead>
             <tbody>
                 {samples.map(sample => (
-                    <tr key={sample.sample_id}>
+                    <tr key={sample.sample_id} onClick={handleShow}>
                         <td>{sample.timestamp.slice(0, 10)}</td>
                         <td>{sample.timestamp.slice(11, 16)}</td>
                         <td>{sample.user_name}</td>
@@ -51,6 +56,21 @@ const ListSamples = () => {
                 ))}
             </tbody>
             </table>
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </Fragment>
     );
 };
