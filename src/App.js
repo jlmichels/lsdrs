@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>LSDRS</h1>
-        <h5 class="mb-4">Laboratory Sample Drop-off/Reception System</h5>
+        <h5 className="mb-4">Laboratory Sample Drop-off/Reception System</h5>
       </header>
       <ListSamples/>
     </div>
