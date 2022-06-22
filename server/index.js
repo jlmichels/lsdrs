@@ -8,7 +8,7 @@ app.use(cors());
 
 app.get('/', async (req, res) => {
     try {
-        const allSamples = await pool.query("SELECT * FROM samples WHERE status='pending'");
+        const allSamples = await pool.query("SELECT samples.sample_id, users.user_name, samples.material, samples.lot, samples.quantity, samples.timestamp, samples.status FROM samples INNER JOIN users ON samples.user_id=users.user_id WHERE status='pending'");
         res.send(allSamples.rows);
     } catch (err) {
         console.error(err.message);
