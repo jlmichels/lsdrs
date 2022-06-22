@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 /* useEffect once buttons added */
 
 const ListSamples = () => {
@@ -15,8 +15,13 @@ const ListSamples = () => {
         }
     }
 
-    /* Modify how often getSamples called */
-    getSamples();
+    useEffect(() => {
+        const interval = setInterval(() => {
+            getSamples();
+        }, 1000);
+
+        return () => clearInterval(interval);
+    });
 
     return (
         <Fragment>
