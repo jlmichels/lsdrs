@@ -37,7 +37,7 @@ const ListSamples = () => {
                     <tr key={sample.sample_id}>
                         <td>{sample.timestamp.slice(0, 10)}</td>
                         <td>{sample.timestamp.slice(11, 16)}</td>
-                        <td>{sample.user_id}</td>
+                        <td>{sample.user_name}</td>
                         <td>{sample.material}</td>
                         <td>{sample.lot}</td>
                         <td>{sample.quantity}</td>
