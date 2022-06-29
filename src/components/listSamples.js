@@ -9,9 +9,7 @@ const ListSamples = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentSample, setCurrentSample] = useState([]);
 
-    const handleClose = () => setShowModal(false);
-    
-    const handleShow = () => setShowModal(true);
+    const toggleShowModal = () => setShowModal(!showModal);
     
     const handleAccept = () => {
         /* update status to accepted */
@@ -26,7 +24,7 @@ const ListSamples = () => {
     const handleOnClick = (sample) => {
         // Set current sample and show modal
         setCurrentSample(sample);
-        handleShow();    
+        toggleShowModal();  
     }
 
     const getSamples = async() => {
@@ -76,7 +74,7 @@ const ListSamples = () => {
             </tbody>
             </table>
 
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={toggleShowModal}>
                 <Modal.Header closeButton>
                 <Modal.Title>Sample Reception</Modal.Title>
                 </Modal.Header>
@@ -117,7 +115,7 @@ const ListSamples = () => {
                 <Button variant="danger" onClick={handleReject}>
                     Reject
                 </Button>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={toggleShowModal}>
                     Cancel
                 </Button>
                 </Modal.Footer>
