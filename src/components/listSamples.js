@@ -7,7 +7,10 @@ const ListSamples = () => {
 
     const [samples, setSamples] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [currentSample, setCurrentSample] = useState([]);
+
     const handleClose = () => setShowModal(false);
+    
     const handleShow = () => setShowModal(true);
     
     const handleAccept = () => {
@@ -18,6 +21,12 @@ const ListSamples = () => {
     const handleReject = () => {
         /* update status to rejected */
         setShowModal(false);
+    }
+
+    const handleOnClick = (sample) => {
+        // Set current sample and show modal
+        setCurrentSample(sample);
+        handleShow();    
     }
 
     const getSamples = async() => {
@@ -54,7 +63,7 @@ const ListSamples = () => {
                 </thead>
             <tbody>
                 {samples.map(sample => (
-                    <tr key={sample.sample_id} onClick={handleShow}>
+                    <tr key={sample.sample_id} onClick={event => handleOnClick(sample)}>
                         <td>{sample.timestamp.slice(0, 10)}</td>
                         <td>{sample.timestamp.slice(11, 16)}</td>
                         <td>{sample.user_name}</td>
@@ -71,18 +80,34 @@ const ListSamples = () => {
                 <Modal.Header closeButton>
                 <Modal.Title>Sample Reception</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Accept or Reject the selected sample
-                    <table className="table table-hover table-bordered table-sm">
-                        <thead>
+                <Modal.Body>
+                    <table className="table table-bordered table-sm">
+                        <tbody>
                             <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>User</th>
-                                <th>Material</th>
-                                <th>Lot</th>
-                                <th>Quantity (grams)</th>
+                                <td>Date</td>
+                                <td>{currentSample.timestamp === undefined ? "" : currentSample.timestamp.slice(0, 10)}</td>
                             </tr>
-                        </thead>
+                            <tr>
+                                <td>Time</td>
+                                <td>{currentSample.timestamp === undefined ? "" : currentSample.timestamp.slice(11, 16)}</td>
+                            </tr>
+                            <tr>
+                                <td>User</td>
+                                <td>{currentSample.user_name}</td>
+                            </tr>
+                            <tr>
+                                <td>Material</td>
+                                <td>{currentSample.material}</td>
+                            </tr>
+                            <tr>
+                                <td>Lot</td>
+                                <td>{currentSample.lot}</td>
+                            </tr>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>{currentSample.quantity}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
