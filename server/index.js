@@ -22,7 +22,6 @@ app.get('/', async (req, res) => {
 app.patch('/samples/:sample_id', async (req, res) => {
     try {
         const { sample_id } = req.params;
-        console.log(req.body);
         const { status } = req.body;
         const updateSample = await pool.query(
             "UPDATE samples SET status=$1 WHERE sample_id=$2", [status, sample_id],
