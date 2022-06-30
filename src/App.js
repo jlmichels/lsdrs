@@ -19,8 +19,6 @@ function App() {
     setShowListSamples(!showListSamples);
   }
 
-  console.log(showListSamples)
-
   return (
     <div className="App">
       <header className="App-header">
