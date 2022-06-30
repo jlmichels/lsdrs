@@ -1,15 +1,17 @@
 import './App.css';
 import React, { useState } from 'react';
 import ListSamples from './components/listSamples';
+import DropoffSamples from './components/dropoffSamples';
 import Button from 'react-bootstrap/Button';
 
 function App() {
   const [showButtons, setShowButtons] = useState(true);
   const [showListSamples, setShowListSamples] = useState(false);
+  const [showDropoffSamples, setShowDropoffSamples] = useState(false);
 
   const handleFactory = () => {
     setShowButtons(!showButtons);
-    // Show sample input screen
+    setShowDropoffSamples(!showDropoffSamples);
   }
 
   const handleLaboratory = () => {
@@ -30,6 +32,7 @@ function App() {
         {showButtons ? <Button size="lg" onClick={handleLaboratory}>Laboratory</Button> : ""}
       </div>
       {showListSamples ? <ListSamples/> : ""}
+      {showDropoffSamples ? <DropoffSamples/> : ""}
     </div>
   );
 }
