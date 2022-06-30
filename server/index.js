@@ -34,6 +34,22 @@ app.patch('/samples/:sample_id', async (req, res) => {
     }
 })
 
+/*
+Initialized DB structure in samples_backup
+
+sample_id | user_id | material | lot | quantity |         timestamp          | status
+-----------+---------+----------+-----+----------+----------------------------+---------
+         2 |       1 | QGT      |  21 |     2000 | 2022-06-19 08:14:49.608828 | pending
+         3 |       1 | HGD      | 105 |      200 | 2022-06-19 08:15:23.008686 | pending
+         4 |       1 | HIH      |   7 |       50 | 2022-06-19 08:15:47.344997 | pending
+         5 |       1 | LON      | 113 |       10 | 2022-06-19 08:16:00.39305  | pending
+
+TRUNCATE samples; to wipe table
+INSERT INTO samples SELECT * FROM samples_backup; to repopulate
+*/
+
+
+
 app.listen(port, () => {
     console.log(`LSDRS server running on port ${port}`)
 })
