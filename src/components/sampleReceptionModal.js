@@ -21,6 +21,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample }) => 
         toggleShowModal();
     }
 
+    // TODO: Implement rejecting: Rejection reason in DB, rejection reason dialog box with Confirm/Cancel, change status to rejected
+
     return(
         <Fragment>
             <Modal show={showModal} onHide={toggleShowModal}>
