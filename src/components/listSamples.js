@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import DevOptions from './devOptions.js'
 /* useEffect once buttons added */
 
 const ListSamples = () => {
@@ -120,6 +121,7 @@ const ListSamples = () => {
                 </Button>
                 </Modal.Footer>
             </Modal>
+            <DevOptions/>
         </Fragment>
     );
 };
