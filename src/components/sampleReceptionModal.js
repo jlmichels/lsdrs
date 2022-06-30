@@ -4,13 +4,20 @@ import Button from 'react-bootstrap/Button';
 
 const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample }) => {
 
-    const handleAccept = () => {
-        /* update status to accepted */
-        toggleShowModal();
-    }
-    
-    const handleReject = () => {
-        /* update status to rejected */
+    const handleStatusChange = async(status) => {
+        try{
+            const res = fetch (`http://localhost:3001/samples/${currentSample.sample_id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    status: `${status}`
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            });
+        } catch (err) {
+            console.error(err.message);
+        }
         toggleShowModal();
     }
 
@@ -51,10 +58,10 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample }) => 
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="success" onClick={handleAccept}>
+                <Button variant="success" onClick={() => handleStatusChange("accepted")}>
                     Accept
                 </Button>
-                <Button variant="danger" onClick={handleReject}>
+                <Button variant="danger" onClick={() => handleStatusChange("rejected")}>
                     Reject
                 </Button>
                 <Button variant="secondary" onClick={toggleShowModal}>
