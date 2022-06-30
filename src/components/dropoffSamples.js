@@ -1,10 +1,21 @@
 import React, { Fragment, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import DropoffLotQuantityModal from './dropoffLotQuantityModal.js'
 
 const DropoffSamples = () => {
     const [dropoffMaterial, setDropoffMaterial] = useState();
-    const [dropoffQuantity, setDropoffQuantity] = useState();
     const [dropoffLot, setDropoffLot] = useState();
+    const [dropoffQuantity, setDropoffQuantity] = useState();
+    const [showModal, setShowModal] = useState(false);
+
+    const handleOnClick = (material) => {
+        setDropoffMaterial(material)
+        toggleShowModal();
+    }
+
+    const toggleShowModal = () => {
+        setShowModal(!showModal);
+    }
 
     /* TODO:
         Modal screen that displayed material, and allows input of lot and selection of quantity (10mg, 50mg, 200g, 2kg)
@@ -19,9 +30,11 @@ const DropoffSamples = () => {
             Select Material
             <div className="d-flex justify-content-center flex-wrap">
                 {materials.map((material) => (
-                    <Button key={material} variant="outline-primary" size="lg" onClick={() => setDropoffMaterial(material)}>{material}</Button>    
+                    <Button key={material} variant="outline-primary" size="lg" onClick={() => handleOnClick(material)}>{material}</Button>    
                 ))}
             </div>
+            <DropoffLotQuantityModal showModal={showModal} toggleShowModal={toggleShowModal} setDropoffLot={setDropoffLot}
+            setDropoffQuantity={setDropoffQuantity} dropoffMaterial={dropoffMaterial}/>
         </Fragment>
     );
 }
