@@ -19,8 +19,8 @@ const DropoffSamples = () => {
             Select Material
             <div className="d-flex justify-content-center flex-wrap">
                 {materials.map((material) => (
-                    <Button variant="outline-primary" size="lg" onClick={() => setDropoffMaterial(material)}>{material}</Button>    
-                ))};
+                    <Button key={material} variant="outline-primary" size="lg" onClick={() => setDropoffMaterial(material)}>{material}</Button>    
+                ))}
             </div>
         </Fragment>
     );
