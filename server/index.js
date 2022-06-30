@@ -34,6 +34,17 @@ app.patch('/samples/:sample_id', async (req, res) => {
     }
 })
 
+// Todo: Better way to implement without :a
+app.patch('/samples/all/:a', async (req, res) => {
+    try {
+        const { status } = req.body;
+        await pool.query("UPDATE samples SET status = $1", [status]);
+        res.json(`All sample statuses set to "${status}" successfully.`);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
 /*
 Initialized DB structure in samples_backup
 
