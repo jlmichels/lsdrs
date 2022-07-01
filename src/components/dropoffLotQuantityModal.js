@@ -86,7 +86,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                             type="radio"
                                             name="radio"
                                             value={radio.quantity}
-                                            checked={dropoffQuantity === radio.quantity}
+                                            checked={dropoffQuantity === parseInt(radio.quantity)}
                                             onChange={(e) => setDropoffQuantity(parseInt(e.currentTarget.value))}
                                         >
                                             {radio.name}
