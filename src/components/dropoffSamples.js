@@ -4,8 +4,6 @@ import DropoffLotQuantityModal from './dropoffLotQuantityModal.js';
 
 const DropoffSamples = () => {
     const [dropoffMaterial, setDropoffMaterial] = useState();
-    const [dropoffLot, setDropoffLot] = useState();
-    const [dropoffQuantity, setDropoffQuantity] = useState();
     const [showModal, setShowModal] = useState(false);
 
     const handleOnClick = (material) => {
@@ -20,6 +18,7 @@ const DropoffSamples = () => {
     /* TODO:
         Auth to get user
         Banner after successful dropoff that fades from view
+        Refactor containers
     */
 
     const materials = ["A1", "B2", "C3", "D4", "E5", "F6"];
@@ -33,8 +32,7 @@ const DropoffSamples = () => {
                     <Button key={material} variant="outline-primary" size="lg" onClick={() => handleOnClick(material)}>{material}</Button>    
                 ))}
             </div>
-            <DropoffLotQuantityModal showModal={showModal} toggleShowModal={toggleShowModal} setDropoffLot={setDropoffLot}
-            setDropoffQuantity={setDropoffQuantity} dropoffMaterial={dropoffMaterial}/>
+            <DropoffLotQuantityModal showModal={showModal} toggleShowModal={toggleShowModal} dropoffMaterial={dropoffMaterial}/>
         </Fragment>
     );
 }

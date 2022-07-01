@@ -44,6 +44,17 @@ app.patch('/samples/all/:a', async (req, res) => {
     }
 })
 
+app.post('/samples', async (req,  res) => {
+    try {
+        const { user_id, material, lot, quantity } = req.body;
+        const newSample = await pool.query("INSERT INTO samples (user_id, material, lot, quantity, timestamp, status) VALUES($1, $2, $3, $4, now(), 'pending') RETURNING *", [user_id, material, lot, quantity]);
+
+        res.json(newSample.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
 /*
 Initialized DB structure in samples_backup
 
@@ -57,8 +68,6 @@ sample_id | user_id | material | lot | quantity |         timestamp          | s
 TRUNCATE samples; to wipe table
 INSERT INTO samples SELECT * FROM samples_backup; to repopulate
 */
-
-
 
 app.listen(port, () => {
     console.log(`LSDRS server running on port ${port}`)

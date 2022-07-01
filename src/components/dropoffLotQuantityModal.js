@@ -5,9 +5,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
-const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, setDropoffQuantity, dropoffMaterial }) => {
-    const [checkedQuantity, setCheckedQuantity] = useState("");
-    const [inputLot, setInputLot] = useState("");
+const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial }) => {
+    const [dropoffLot, setDropoffLot] = useState();
+    const [dropoffQuantity, setDropoffQuantity] = useState();
 
     const radios = [
         { name: '10 mg', quantity: '10' },
@@ -17,8 +17,25 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, se
       ];
 
     const handleClose = () => {
-        setCheckedQuantity("");
+        setDropoffQuantity("");
         toggleShowModal();
+    }
+
+    const postSample = async () => {
+        try {
+            const newSample = await fetch("http://localhost:3001/samples", {
+                method:"POST",
+                body: JSON.stringify({
+                    user_id: 1,
+                    material: dropoffMaterial,
+                    lot: dropoffLot,
+                    quantity: dropoffQuantity
+                }),
+                headers: { "Content-Type": "application/json" }
+            }).then(console.log("Added new sample"));
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 
     return(
@@ -39,11 +56,11 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, se
                                 <td>
                                     <Form>
                                         <Form.Group controlid="lotForm">
-                                            <Form.Control placeholder="Enter lot number" onChange={(e) => (
-                                                setInputLot(e.currentTarget.value),
-                                                console.log(e.currentTarget.value))}/>
+                                            <Form.Control placeholder="Enter lot number" onChange={(e) => {
+                                                setDropoffLot(e.currentTarget.value);
+                                                console.log(e.currentTarget.value);}}/>
                                             <Form.Text className="text-muted">
-                                                {/* Input checking */}
+                                                {/* Lot input checking; numbers only, no text, not empty */}
                                                 Without leading zeros
                                             </Form.Text>
                                         </Form.Group>
@@ -62,8 +79,8 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, se
                                             type="radio"
                                             name="radio"
                                             value={radio.quantity}
-                                            checked={checkedQuantity === radio.quantity}
-                                            onChange={(e) => setCheckedQuantity(e.currentTarget.value)}
+                                            checked={dropoffQuantity === radio.quantity}
+                                            onChange={(e) => setDropoffQuantity(parseInt(e.currentTarget.value))}
                                         >
                                             {radio.name}
                                         </ToggleButton>
@@ -75,11 +92,11 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, se
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="success" onClick={() => (
-                    setDropoffQuantity(checkedQuantity),
-                    /* DB request */
-                    handleClose()
-                    )}>
+                <Button variant="success" onClick={() => {
+                    setDropoffQuantity(dropoffQuantity);
+                    postSample();
+                    handleClose();
+                }}>
                     Confirm
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>
