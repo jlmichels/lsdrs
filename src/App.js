@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import ListSamples from './components/listSamples';
 import DropoffSamples from './components/dropoffSamples';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 function App() {
   const [showButtons, setShowButtons] = useState(true);
   const [showListSamples, setShowListSamples] = useState(false);
   const [showDropoffSamples, setShowDropoffSamples] = useState(false);
+  const [alertVariant, setAlertVariant] = useState("light");
+  const [alertText, setAlertText] = useState("test");
 
   const handleFactory = () => {
     setShowButtons(!showButtons);
@@ -21,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+      <Alert key="sampleDroppoffAccepted" variant={alertVariant}>{alertText}</Alert>
       <header className="App-header">
         <h1>LSDRS</h1>
         <h5 className="mb-4">Laboratory Sample Drop-off/Reception System</h5>
