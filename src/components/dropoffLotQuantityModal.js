@@ -6,8 +6,12 @@ import Form from 'react-bootstrap/Form';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, handleNewSample }) => {
-    const [dropoffLot, setDropoffLot] = useState();
-    const [dropoffQuantity, setDropoffQuantity] = useState();
+    const lotDefault = "";
+    const [dropoffLot, setDropoffLot] = useState(lotDefault);
+    const quantityDefault = 1;
+    const [dropoffQuantity, setDropoffQuantity] = useState(quantityDefault);
+    const [lotError, setLotError] = useState(false);
+    const [quantityError, setQuantityError] = useState(false);
 
     const radios = [
         { name: '10 mg', quantity: '10' },
@@ -26,8 +30,25 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
         setDropoffLot(e.currentTarget.value);
     }
 
+    const handleConfirm = () => {
+        const lotEntered = dropoffLot !== "";
+        const quantitySelected = dropoffQuantity !== 1;
+
+        setLotError(!lotEntered);
+        setQuantityError(!quantitySelected);
+
+        if (lotEntered && quantitySelected) {
+            setDropoffQuantity(dropoffQuantity);
+            postSample();
+            handleClose();   
+        }
+    }
+
     const handleClose = () => {
-        setDropoffQuantity("");
+        setDropoffLot(lotDefault);
+        setDropoffQuantity(quantityDefault);
+        setLotError(false);
+        setQuantityError(false);
         toggleShowModal();
     }
 
@@ -71,6 +92,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                                 Numbers only. No leading zeros.
                                             </Form.Text>
                                         </Form.Group>
+                                        <div>{!lotError ? "" : "Please enter a lot number"}</div>
                                     </Form>    
                                 </td>
                             </tr>
@@ -93,17 +115,14 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                         </ToggleButton>
                                         ))}
                                     </ButtonGroup>
+                                    <div>{!quantityError ? "" : "Please select a quantity"}</div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="success" onClick={() => {
-                    setDropoffQuantity(dropoffQuantity);
-                    postSample();
-                    handleClose();
-                }}>
+                <Button variant="success" onClick={handleConfirm}>
                     Confirm
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>
