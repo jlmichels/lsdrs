@@ -53,25 +53,28 @@ const ListSamples = () => {
                         <th>Quantity (grams)</th>
                     </tr>
                 </thead>
-            <tbody>
-                {samples !== "empty" 
-                ? samples.map(sample => (
-                    <tr key={sample.sample_id} onClick={event => handleOnClick(sample)}>
-                        <td>{sample.timestamp.slice(0, 10)}</td>
-                        <td>{sample.timestamp.slice(11, 16)}</td>
-                        <td>{sample.user_name}</td>
-                        <td>{sample.material}</td>
-                        <td>{sample.lot}</td>
-                        <td>{sample.quantity}</td>
-                    </tr>
-                ))
-                : <tr>
-                    <Spinner animation="border" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                </tr>}
-            </tbody>
+                <tbody>
+                    {samples !== "empty" 
+                    ? samples.map(sample => (
+                        <tr key={sample.sample_id} onClick={event => handleOnClick(sample)}>
+                            <td>{sample.timestamp.slice(0, 10)}</td>
+                            <td>{sample.timestamp.slice(11, 16)}</td>
+                            <td>{sample.user_name}</td>
+                            <td>{sample.material}</td>
+                            <td>{sample.lot}</td>
+                            <td>{sample.quantity}</td>
+                        </tr>
+                    ))
+                    : "" }
+                </tbody>
             </table>
+            {samples === "empty"
+            ? <div className="d-flex justify-content-center">
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>
+            : ""}
             <SampleReceptionModal showModal={showModal} toggleShowModal={toggleShowModal} currentSample={currentSample} clearSamples={clearSamples} getSamples={getSamples}/>
             <DevOptions/>
         </Fragment>
