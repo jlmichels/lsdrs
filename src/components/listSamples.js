@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import DevOptions from './devOptions.js';
+import DevOptionsDropdown from './devOptionsDropdown.js';
 import SampleReceptionModal from './sampleReceptionModal.js';
 import Spinner from "react-bootstrap/Spinner";
 /* useEffect once buttons added */
@@ -76,7 +76,8 @@ const ListSamples = () => {
             </div>
             : ""}
             <SampleReceptionModal showModal={showModal} toggleShowModal={toggleShowModal} currentSample={currentSample} clearSamples={clearSamples} getSamples={getSamples}/>
-            <DevOptions/>
+            {/* align DevOptions to footer */}
+            <DevOptionsDropdown/>
         </Fragment>
     );
 };

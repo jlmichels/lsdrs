@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const DevOptions = () => {
+const DevOptionsDropdown = () => {
 
     const resetStatuses = async() => {
         try {
@@ -37,4 +37,4 @@ const DevOptions = () => {
 
 };
 
-export default DevOptions;
+export default DevOptionsDropdown;
