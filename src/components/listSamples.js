@@ -51,7 +51,6 @@ const ListSamples = () => {
                         <th>Material</th>
                         <th>Lot</th>
                         <th>Quantity (grams)</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
             <tbody>
@@ -64,7 +63,6 @@ const ListSamples = () => {
                         <td>{sample.material}</td>
                         <td>{sample.lot}</td>
                         <td>{sample.quantity}</td>
-                        <td>{sample.status}</td>
                     </tr>
                 ))
                 : <tr>
