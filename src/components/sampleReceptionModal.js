@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample }) => {
+const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clearSamples, getSamples }) => {
 
     const handleStatusChange = async(status) => {
         try{
@@ -14,11 +14,10 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample }) => 
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 }
-            });
+            }).then(clearSamples).then(toggleShowModal().then(getSamples()));
         } catch (err) {
             console.error(err.message);
         }
-        toggleShowModal();
     }
 
     // TODO: Implement rejecting: Rejection reason in DB, rejection reason dialog box with Confirm/Cancel, change status to rejected

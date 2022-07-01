@@ -1,22 +1,25 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import DevOptions from './devOptions.js'
+import DevOptions from './devOptions.js';
 import SampleReceptionModal from './sampleReceptionModal.js';
+import Spinner from "react-bootstrap/Spinner";
 /* useEffect once buttons added */
 
 const ListSamples = () => {
 
-    const [samples, setSamples] = useState([]);
+    const [samples, setSamples] = useState("empty");
     const [showModal, setShowModal] = useState(false);
     const [currentSample, setCurrentSample] = useState([]);
-
     const toggleShowModal = () => {
         setShowModal(!showModal);
     }
     
     const handleOnClick = (sample) => {
-        // Set current sample and show modal
         setCurrentSample(sample);
         toggleShowModal();  
+    }
+
+    const clearSamples = () => {
+        setSamples("empty");
     }
 
     const getSamples = async() => {
@@ -52,7 +55,8 @@ const ListSamples = () => {
                     </tr>
                 </thead>
             <tbody>
-                {samples.map(sample => (
+                {samples !== "empty" 
+                ? samples.map(sample => (
                     <tr key={sample.sample_id} onClick={event => handleOnClick(sample)}>
                         <td>{sample.timestamp.slice(0, 10)}</td>
                         <td>{sample.timestamp.slice(11, 16)}</td>
@@ -62,10 +66,15 @@ const ListSamples = () => {
                         <td>{sample.quantity}</td>
                         <td>{sample.status}</td>
                     </tr>
-                ))}
+                ))
+                : <tr>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </tr>}
             </tbody>
             </table>
-            <SampleReceptionModal showModal={showModal} toggleShowModal={toggleShowModal} currentSample={currentSample}/>
+            <SampleReceptionModal showModal={showModal} toggleShowModal={toggleShowModal} currentSample={currentSample} clearSamples={clearSamples} getSamples={getSamples}/>
             <DevOptions/>
         </Fragment>
     );
