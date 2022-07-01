@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, setDropoffQuantity, dropoffMaterial }) => {
-    const [checkedQuantity, setCheckedQuantity] = useState("10");
+    const [checkedQuantity, setCheckedQuantity] = useState("");
     const [inputLot, setInputLot] = useState("");
 
     const radios = [
@@ -16,9 +16,14 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, se
         { name: '2 kg', quantity: '2000' },
       ];
 
+    const handleClose = () => {
+        setCheckedQuantity("");
+        toggleShowModal();
+    }
+
     return(
         <Fragment>
-            <Modal show={showModal} onHide={toggleShowModal}>
+            <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>Sample Details</Modal.Title>
                 </Modal.Header>
@@ -70,14 +75,14 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, setDropoffLot, se
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
-                {/* Not displaying checkedQuantity; only undefined*/}
                 <Button variant="success" onClick={() => (
                     setDropoffQuantity(checkedQuantity),
-                    toggleShowModal()
+                    /* DB request */
+                    handleClose()
                     )}>
                     Confirm
                 </Button>
-                <Button variant="secondary" onClick={toggleShowModal}>
+                <Button variant="secondary" onClick={handleClose}>
                     Cancel
                 </Button>
                 </Modal.Footer>
