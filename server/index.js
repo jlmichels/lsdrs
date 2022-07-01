@@ -10,6 +10,15 @@ app.use(bodyParser.json());
 
 /* Routes */
 
+app.delete('/dev', async (req, res) => {
+    try {
+        const clearSamples = await pool.query("TRUNCATE samples");
+        res.json("Cleared all samples");
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
 app.get('/', async (req, res) => {
     try {
         const allSamples = await pool.query("SELECT samples.sample_id, users.user_name, samples.material, samples.lot, samples.quantity, samples.timestamp, samples.status FROM samples INNER JOIN users ON samples.user_id=users.user_id WHERE status='pending'");
@@ -48,8 +57,16 @@ app.post('/samples', async (req,  res) => {
     try {
         const { user_id, material, lot, quantity } = req.body;
         const newSample = await pool.query("INSERT INTO samples (user_id, material, lot, quantity, timestamp, status) VALUES($1, $2, $3, $4, now(), 'pending') RETURNING *", [user_id, material, lot, quantity]);
-
         res.json(newSample.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.post('/dev/repopulate', async (req, res) => {
+    try {
+        const repopulate = await pool.query("INSERT INTO samples SELECT * FROM samples_backup");
+        res.json("Repopulated with default samples.")
     } catch (err) {
         console.error(err.message);
     }

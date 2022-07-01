@@ -19,6 +19,34 @@ const DevOptionsDropdown = () => {
         }
     }
 
+    const clearSamples = async() => {
+        try {
+            const res = await fetch('http://localhost:3001/dev', {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            })
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    const repopulateSamples = async() => {
+        try {
+            const res = await fetch('http://localhost:3001/dev/repopulate', {
+                method: 'POST'
+            })
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    const clearAndRepopulateSamples = async () => {
+        await clearSamples();
+        await repopulateSamples();
+    }
+
     return (
         <Fragment>
             <Dropdown>
@@ -29,7 +57,11 @@ const DevOptionsDropdown = () => {
                 <Dropdown.Menu>
                     <Dropdown.Item as="button" onClick={resetStatuses}>Reset All Statuses to Pending</Dropdown.Item>
                     <Dropdown.Divider/>
-                    <Dropdown.Item as="button">Reinitialize Database</Dropdown.Item>
+                    <Dropdown.Item as="button" onClick={clearSamples}>Clear Samples</Dropdown.Item>
+                    <Dropdown.Divider/>
+                    <Dropdown.Item as="button" onClick={repopulateSamples}>Repopulate Default Samples</Dropdown.Item>
+                    <Dropdown.Divider/>
+                    <Dropdown.Item as="button" onClick={clearAndRepopulateSamples}>Clear & Repopulate Default Samples</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </Fragment>
