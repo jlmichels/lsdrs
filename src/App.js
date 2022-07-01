@@ -27,7 +27,7 @@ function App() {
       <Alert key="sampleDroppoffAccepted" variant={alertVariant}>{alertText}</Alert>
       <header className="App-header">
         <h1>LSDRS</h1>
-        <h5 className="mb-4">Laboratory Sample Drop-off/Reception System</h5>
+        <h6 className="mb-4">Laboratory Sample Drop-off/Reception System</h6>
       </header>
       <div className="d-grid gap-2">
         {showButtons ? <Button size="lg" onClick={handleFactory}>Factory</Button> : ""}
