@@ -16,6 +16,16 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial }
         { name: '2 kg', quantity: '2000' },
       ];
 
+    const handleLotChange = (e) => {
+        // No leading zeros
+        e.currentTarget.value = e.currentTarget.value.replace(/^0*/, "");
+
+        // No characters other than 0-9
+        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+
+        setDropoffLot(e.currentTarget.value);
+    }
+
     const handleClose = () => {
         setDropoffQuantity("");
         toggleShowModal();
@@ -56,12 +66,9 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial }
                                 <td>
                                     <Form>
                                         <Form.Group controlid="lotForm">
-                                            <Form.Control placeholder="Enter lot number" onChange={(e) => {
-                                                setDropoffLot(e.currentTarget.value);
-                                                console.log(e.currentTarget.value);}}/>
+                                            <Form.Control placeholder="Enter lot number" onChange={(e) => handleLotChange(e)}/>
                                             <Form.Text className="text-muted">
-                                                {/* Lot input checking; numbers only, no text, not empty */}
-                                                Without leading zeros
+                                                Numbers only. No leading zeros.
                                             </Form.Text>
                                         </Form.Group>
                                     </Form>    
