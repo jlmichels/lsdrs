@@ -50,7 +50,7 @@ const ListSamples = () => {
                         <th>User</th>
                         <th>Material</th>
                         <th>Lot</th>
-                        <th>Quantity (grams)</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@ const ListSamples = () => {
                             <td>{sample.user_name}</td>
                             <td>{sample.material}</td>
                             <td>{sample.lot}</td>
-                            <td>{sample.quantity}</td>
+                            <td>{sample.quantity > 1000 ? sample.quantity/1000 + " kg" : sample.quantity + " g"}</td>
                         </tr>
                     ))
                     : "" }
