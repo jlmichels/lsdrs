@@ -4,13 +4,16 @@ import ListSamples from './components/listSamples';
 import DropoffSamples from './components/dropoffSamples';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import Fade from 'react-bootstrap/Fade';
 
 function App() {
   const [showButtons, setShowButtons] = useState(true);
   const [showListSamples, setShowListSamples] = useState(false);
   const [showDropoffSamples, setShowDropoffSamples] = useState(false);
   const [alertVariant, setAlertVariant] = useState("light");
-  const [alertText, setAlertText] = useState("test");
+  const fullWidthSpace = "　";
+  const [alertText, setAlertText] = useState(fullWidthSpace);
+  
 
   const handleFactory = () => {
     setShowButtons(!showButtons);
@@ -22,9 +25,20 @@ function App() {
     setShowListSamples(!showListSamples);
   }
 
+  const handleNewSample = (text) => {
+    /* display alert for short time, then close */
+    setAlertVariant("success");
+    setAlertText(text);
+
+    setTimeout(() => {
+      setAlertVariant("light");
+      setAlertText(fullWidthSpace);
+    }, 2000)
+  }
+
   return (
     <div className="App">
-      <Alert key="sampleDroppoffAccepted" variant={alertVariant}>{alertText}</Alert>
+      <Alert key="sampleDroppoffAccepted" variant={alertVariant} transition={Fade}>{alertText}</Alert>
       <header className="App-header">
         <h1>LSDRS</h1>
         <h6 className="mb-4">Laboratory Sample Drop-off/Reception System</h6>
@@ -34,7 +48,7 @@ function App() {
         {showButtons ? <Button size="lg" onClick={handleLaboratory}>Laboratory</Button> : ""}
       </div>
       {showListSamples ? <ListSamples/> : ""}
-      {showDropoffSamples ? <DropoffSamples/> : ""}
+      {showDropoffSamples ? <DropoffSamples handleNewSample={handleNewSample}/> : ""}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
-const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial }) => {
+const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, handleNewSample }) => {
     const [dropoffLot, setDropoffLot] = useState();
     const [dropoffQuantity, setDropoffQuantity] = useState();
 
@@ -42,7 +42,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial }
                     quantity: dropoffQuantity
                 }),
                 headers: { "Content-Type": "application/json" }
-            }).then(console.log("Added new sample"));
+            }).then(console.log("Added new sample")).then(handleNewSample("Added new sample: " + dropoffMaterial + ", lot " + dropoffLot + "."));
         } catch (err) {
             console.error(err.message);
         }

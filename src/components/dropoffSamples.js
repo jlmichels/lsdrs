@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import DropoffLotQuantityModal from './dropoffLotQuantityModal.js';
 
-const DropoffSamples = () => {
+const DropoffSamples = ( { handleNewSample }) => {
     const [dropoffMaterial, setDropoffMaterial] = useState();
     const [showModal, setShowModal] = useState(false);
 
@@ -32,7 +32,7 @@ const DropoffSamples = () => {
                     <Button key={material} variant="outline-primary" size="lg" onClick={() => handleOnClick(material)}>{material}</Button>    
                 ))}
             </div>
-            <DropoffLotQuantityModal showModal={showModal} toggleShowModal={toggleShowModal} dropoffMaterial={dropoffMaterial}/>
+            <DropoffLotQuantityModal showModal={showModal} toggleShowModal={toggleShowModal} dropoffMaterial={dropoffMaterial} handleNewSample={handleNewSample}/>
         </Fragment>
     );
 }
