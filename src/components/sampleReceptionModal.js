@@ -164,12 +164,12 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
                                     {radio.rejectionReason}
                                 </ToggleButton>
                             ))}
-                            <div>{!rejectionReasonError ? "" : "Please select a reason"}</div>
+                            <div className="text-danger">{!rejectionReasonError ? "" : "Please select a reason"}</div>
                             {showRejectionInput ?
                             <Form className="w-100">
                                 <Form.Group controlid="rejectionReasonForm">
                                     <Form.Control as="textarea" placeholder="Enter rejection reason" onChange={(e) => handleRejectionInput(e)}/>
-                                    <div>{!rejectionInputError ? "" : "Please input a reason"}</div>
+                                    <div className="text-danger">{!rejectionInputError ? "" : "Please input a reason"}</div>
                                 </Form.Group>
                             </Form>
                             : ""}

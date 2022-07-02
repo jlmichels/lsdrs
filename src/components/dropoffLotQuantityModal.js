@@ -92,7 +92,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                                 Numbers only. No leading zeros.
                                             </Form.Text>
                                         </Form.Group>
-                                        <div>{!lotError ? "" : "Please enter a lot number"}</div>
+                                        <div className="text-danger">{!lotError ? "" : "Please enter a lot number"}</div>
                                     </Form>    
                                 </td>
                             </tr>
@@ -115,7 +115,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                         </ToggleButton>
                                         ))}
                                     </ButtonGroup>
-                                    <div>{!quantityError ? "" : "Please select a quantity"}</div>
+                                    <div className="text-danger">{!quantityError ? "" : "Please select a quantity"}</div>
                                 </td>
                             </tr>
                         </tbody>
