@@ -79,11 +79,11 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                     <table className="table table-bordered table-sm">
                         <tbody>
                             <tr>
-                                <td>Material</td>
-                                <td>{dropoffMaterial}</td>
+                                <td className="align-middle">Material</td>
+                                <td className="align-middle">{dropoffMaterial}</td>
                             </tr>
                             <tr>
-                                <td>Lot</td>
+                                <td className="align-middle">Lot</td>
                                 <td>
                                     <Form>
                                         <Form.Group controlid="lotForm">
@@ -97,7 +97,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                 </td>
                             </tr>
                             <tr>
-                                <td>Quantity</td>
+                                <td className="align-middle">Quantity</td>
                                 <td>
                                     <ButtonGroup>
                                         {radios.map((radio, index) => (
