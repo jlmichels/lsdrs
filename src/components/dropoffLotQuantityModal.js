@@ -18,7 +18,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
         { name: '50 mg', quantity: '50' },
         { name: '200 g', quantity: '200' },
         { name: '2 kg', quantity: '2000' },
-      ];
+    ];
 
     const handleLotChange = (e) => {
         // No leading zeros
