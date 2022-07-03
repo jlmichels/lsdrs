@@ -63,7 +63,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                     quantity: dropoffQuantity
                 }),
                 headers: { "Content-Type": "application/json" }
-            }).then(console.log("Added new sample")).then(handleNewSample("Added new sample: " + dropoffMaterial + ", lot " + dropoffLot + "."));
+            }).then(handleNewSample("Added new sample: " + dropoffMaterial + ", lot " + dropoffLot + "."));
         } catch (err) {
             console.error(err.message);
         }
