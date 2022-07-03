@@ -17,3 +17,6 @@ LSDRS is a PERN stack app that enables factory workers to drop off samples and l
 ## Roadmap
 - User authentication system
 - Display rejection notices on Factory side
+
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
