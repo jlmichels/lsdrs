@@ -40,7 +40,8 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
         }        
     }
 
-    const handleConfirm = () => {
+    const handleConfirm = (e) => {
+        e.preventDefault();
         const lotEntered = dropoffLot !== "";
         const quantitySelected = dropoffQuantity !== 1;
 
@@ -96,7 +97,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                             <tr>
                                 <td className="align-middle">Lot</td>
                                 <td>
-                                    <Form>
+                                    <Form onSubmit={handleConfirm}> {/* half works; runs, but dismisses */}
                                         <Form.Group controlid="lotForm">
                                             <Form.Control placeholder="Enter lot number" onChange={(e) => handleLotChange(e)}/>
                                             <Form.Text className="text-muted">
