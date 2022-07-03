@@ -65,7 +65,7 @@ const ListSamples = () => {
                             <td>{sample.quantity > 1000 ? sample.quantity/1000 + " kg" : sample.quantity + " g"}</td>
                         </tr>
                     ))
-                    : "" }
+                    : null }
                 </tbody>
             </table>
             {samples === "empty"
