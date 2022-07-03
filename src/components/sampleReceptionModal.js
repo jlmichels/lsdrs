@@ -12,7 +12,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
     const showRejectReasonsDefault = false;
     const showRejectionInputDefault = false;
     const rejectionReasonErrorDefault = false;
-    const rejectionInputErrorDefault = false;
+    const rejectionInputNoEntryErrorDefault = false;
+    const rejectionInputCharacterLimitErrorDefault = false;
     const rejectionInputDefault = "";
     const rejectionReasonDefault = "";
     const [showAcceptButton, setShowAcceptButton] = useState(showAcceptButtonDefault);
@@ -22,7 +23,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
     const [rejectionReason, setRejectionReason] = useState(rejectionReasonDefault);
     const [rejectionInput, setRejectionInput] = useState(rejectionInputDefault);
     const [rejectionReasonError, setRejectionReasonError] = useState(rejectionReasonErrorDefault);
-    const [rejectionInputError, setRejectionInputError] = useState(rejectionInputErrorDefault);
+    const [rejectionInputNoEntryError, setRejectionInputNoEntryError] = useState(rejectionInputNoEntryErrorDefault);
+    const [rejectionInputCharacterLimitError, setRejectionInputCharacterLimitError] = useState(rejectionInputCharacterLimitErrorDefault);
 
     const radios = [
         { rejectionReason: "Details do not match sample packaging"},
@@ -41,7 +43,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
         setRejectionReason(rejectionReasonDefault);
         setRejectionInput(rejectionInputDefault);
         setRejectionReasonError(rejectionReasonErrorDefault);
-        setRejectionInputError(rejectionInputErrorDefault);
+        setRejectionInputNoEntryError(rejectionInputNoEntryErrorDefault);
+        setRejectionInputCharacterLimitError(rejectionInputCharacterLimitErrorDefault);
     }
 
     const handleFirstReject = () => {
@@ -55,7 +58,7 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
         if (rejectionReason === rejectionReasonDefault) {
             setRejectionReasonError(true);
         } else if (rejectionReason === "Other" && rejectionInput === rejectionInputDefault) {
-            setRejectionInputError(true);
+            setRejectionInputNoEntryError(true);
         } else {
             let trimmedRejectionInput = rejectionInput.trim();
             handleStatusChange("rejected", rejectionReason === "Other" ? trimmedRejectionInput: rejectionReason);
@@ -92,9 +95,14 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
 
     const handleRejectionInput = (e) => {
         const currentRejectionInput = e.currentTarget.value;
-        if (rejectionInputError && currentRejectionInput.length > 0) setRejectionInputError(false);
-        if (currentRejectionInput.length < 501) setRejectionInput(currentRejectionInput);
-        if (currentRejectionInput.length > 500) e.currentTarget.value = rejectionInput;
+        if (rejectionInputNoEntryError && currentRejectionInput.length > 0) setRejectionInputNoEntryError(false);
+        if (currentRejectionInput.length < 501) {
+            if (rejectionInputCharacterLimitError) setRejectionInputCharacterLimitError(false);
+            setRejectionInput(currentRejectionInput);
+        } else {
+            e.currentTarget.value = rejectionInput;
+            setRejectionInputCharacterLimitError(true);
+        }
     }
 
     const toggleShowAcceptButton = () => {
@@ -171,7 +179,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
                             <Form className="w-100">
                                 <Form.Group controlid="rejectionReasonForm">
                                     <Form.Control as="textarea" placeholder="Enter rejection reason" onChange={(e) => handleRejectionInput(e)}/>
-                                    <div className="text-danger">{!rejectionInputError ? "" : "Please input a reason"}</div>
+                                    <div className="text-danger">{!rejectionInputNoEntryError ? "" : "Please input a reason"}</div>
+                                    <div className="text-danger">{!rejectionInputCharacterLimitError ? "" : "Maximum character limit (500)"}</div>
                                 </Form.Group>
                             </Form>
                             : ""}
