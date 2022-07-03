@@ -50,11 +50,11 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
         if (lotEntered && quantitySelected && !lotErrorMaxExceeded) {
             setDropoffQuantity(dropoffQuantity);
             postSample();
-            handleClose();   
+            handleHide();   
         }
     }
 
-    const handleClose = () => {
+    const handleHide = () => {
         setDropoffLot(lotDefault);
         setDropoffQuantity(quantityDefault);
         setLotErrorNoEntry(false);
@@ -82,7 +82,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
 
     return(
         <Fragment>
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={handleHide}>
                 <Modal.Header closeButton>
                 <Modal.Title>Sample Details</Modal.Title>
                 </Modal.Header>
@@ -137,7 +137,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                 <Button variant="success" onClick={handleConfirm}>
                     Confirm
                 </Button>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleHide}>
                     Cancel
                 </Button>
                 </Modal.Footer>
