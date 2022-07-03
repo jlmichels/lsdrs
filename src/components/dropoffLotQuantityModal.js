@@ -34,7 +34,6 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
         if (inputLot === "" || parseInt(inputLot) <= integerMax) {
             setLotErrorMaxExceeded(false);
             setDropoffLot(inputLot);
-            console.log("Set to " + inputLot)
         } else {
             setLotErrorMaxExceeded(true);
         }        
