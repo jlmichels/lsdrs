@@ -5,7 +5,8 @@ const DevOptionsDropdown = () => {
 
     const resetStatuses = async() => {
         try {
-            const res = await fetch('http://localhost:3001/samples/all/1', {
+            // http://localhost:3001
+            const res = await fetch('/samples/all/1', {
                 method: 'PATCH',
                 body: JSON.stringify({
                     status: 'pending',
@@ -21,7 +22,8 @@ const DevOptionsDropdown = () => {
 
     const clearSamples = async() => {
         try {
-            const res = await fetch('http://localhost:3001/dev', {
+            // http://localhost:3001
+            const res = await fetch('/dev', {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -34,7 +36,8 @@ const DevOptionsDropdown = () => {
 
     const repopulateSamples = async() => {
         try {
-            const res = await fetch('http://localhost:3001/dev/repopulate', {
+            // http://localhost:3001
+            const res = await fetch('/dev/repopulate', {
                 method: 'POST'
             })
         } catch (err) {
