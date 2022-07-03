@@ -8,16 +8,17 @@ LSDRS is a PostgreSQL/Express/React/Node (PERN) full-stack app that enables fact
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Node](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
-## Front-end Technologies
+## Technologies
+### Front-end
 - [React.js](https://reactjs.org/)
 - [React-Bootstrap](https://www.npmjs.com/package/react-bootstrap)
 
-## Back-end Technologies
+### Back-end
 - [PostgreSQL](https://www.postgresql.org/)
 - [Express.js](https://expressjs.com/)
 - [Node.js](https://nodejs.org/en/)
 
-## Other Technologies
+### Other
 - [Postman API Platform](https://www.postman.com/) - Test app API
 - [nodemon](https://www.npmjs.com/package/nodemon) - Restart node app on file changes
 - [dotenv](https://www.npmjs.com/package/dotenv) - Load environment variables
@@ -34,13 +35,9 @@ LSDRS is a PostgreSQL/Express/React/Node (PERN) full-stack app that enables fact
   - Repopulate table with default test samples
   - Clear all samples and repopulate (options 2 + 3)
 
-## Code Example - Front-end
-
-## Code Example - Back-end
-
 ## Roadmap
 - User authentication system
-- Display rejection notices on Factory side
+- Display rejection notices to factory side
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
