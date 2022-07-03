@@ -57,7 +57,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
         } else if (rejectionReason === "Other" && rejectionInput === rejectionInputDefault) {
             setRejectionInputError(true);
         } else {
-            handleStatusChange("rejected", rejectionReason === "Other" ? rejectionInput: rejectionReason);
+            let trimmedRejectionInput = rejectionInput.trim();
+            handleStatusChange("rejected", rejectionReason === "Other" ? trimmedRejectionInput: rejectionReason);
             handleHide();
         }        
     }
@@ -93,6 +94,7 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
         const currentRejectionInput = e.currentTarget.value;
         if (rejectionInputError && currentRejectionInput.length > 0) setRejectionInputError(false);
         if (currentRejectionInput.length < 501) setRejectionInput(currentRejectionInput);
+        if (currentRejectionInput.length > 500) e.currentTarget.value = rejectionInput;
     }
 
     const toggleShowAcceptButton = () => {
