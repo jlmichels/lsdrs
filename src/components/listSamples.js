@@ -50,7 +50,7 @@ const ListSamples = () => {
                         <th>User</th>
                         <th>Material</th>
                         <th>Lot</th>
-                        <th>Quantity</th>
+                        <th>Qty</th>
                     </tr>
                 </thead>
                 <tbody>
