@@ -7,10 +7,12 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, handleNewSample }) => {
     const lotDefault = "";
+    const integerMax = 2147483647;
     const [dropoffLot, setDropoffLot] = useState(lotDefault);
     const quantityDefault = 1;
     const [dropoffQuantity, setDropoffQuantity] = useState(quantityDefault);
-    const [lotError, setLotError] = useState(false);
+    const [lotErrorNoEntry, setLotErrorNoEntry] = useState(false);
+    const [lotErrorMaxExceeded, setLotErrorMaxExceeded] = useState(false);
     const [quantityError, setQuantityError] = useState(false);
 
     const radios = [
@@ -21,23 +23,31 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
     ];
 
     const handleLotChange = (e) => {
+        let inputLot = e.currentTarget.value;
+
         // No leading zeros
-        e.currentTarget.value = e.currentTarget.value.replace(/^0*/, "");
+        inputLot = inputLot.replace(/^0*/, "");
 
-        // No characters other than 0-9
-        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+        // No characters other than 0-9; handles no negative values
+        inputLot = inputLot.replace(/[^0-9]/g, "");
 
-        setDropoffLot(e.currentTarget.value);
+        if (inputLot === "" || parseInt(inputLot) <= integerMax) {
+            setLotErrorMaxExceeded(false);
+            setDropoffLot(inputLot);
+            console.log("Set to " + inputLot)
+        } else {
+            setLotErrorMaxExceeded(true);
+        }        
     }
 
     const handleConfirm = () => {
         const lotEntered = dropoffLot !== "";
         const quantitySelected = dropoffQuantity !== 1;
 
-        setLotError(!lotEntered);
+        setLotErrorNoEntry(!lotEntered);
         setQuantityError(!quantitySelected);
 
-        if (lotEntered && quantitySelected) {
+        if (lotEntered && quantitySelected && !lotErrorMaxExceeded) {
             setDropoffQuantity(dropoffQuantity);
             postSample();
             handleClose();   
@@ -47,7 +57,8 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
     const handleClose = () => {
         setDropoffLot(lotDefault);
         setDropoffQuantity(quantityDefault);
-        setLotError(false);
+        setLotErrorNoEntry(false);
+        setLotErrorMaxExceeded(false);
         setQuantityError(false);
         toggleShowModal();
     }
@@ -92,7 +103,8 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                                                 Numbers only. No leading zeros.
                                             </Form.Text>
                                         </Form.Group>
-                                        <div className="text-danger">{!lotError ? "" : "Please enter a lot number"}</div>
+                                        <div className="text-danger">{!lotErrorNoEntry ? "" : "Please enter a lot number"}</div>
+                                        <div className="text-danger">{!lotErrorMaxExceeded ? "" : "Maximum lot exceeed. Please contact your administrator."}</div>
                                     </Form>    
                                 </td>
                             </tr>
