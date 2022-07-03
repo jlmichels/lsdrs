@@ -1,7 +1,5 @@
 require('dotenv').config({ path: './.env' });
 /* Using .env variables: process.env.TEST1 */
-console.log("process.env.DATABASE_URL");
-console.log(process.env.DATABASE_URL);
 const Pool = require('pg').Pool
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL
