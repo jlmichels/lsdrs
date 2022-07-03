@@ -20,7 +20,7 @@ LSDRS is a PostgreSQL/Express/React/Node (PERN) full-stack app that enables fact
 
 ### Other
 - [Postman API Platform](https://www.postman.com/) - Test app API
-- [nodemon](https://www.npmjs.com/package/nodemon) - Restart node app on file changes
+- [nodemon](https://www.npmjs.com/package/nodemon) - Restart Node app on file changes
 - [dotenv](https://www.npmjs.com/package/dotenv) - Load environment variables
 
 ## Features
