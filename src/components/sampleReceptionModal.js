@@ -73,7 +73,7 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 }
-            }).then(clearSamples).then(toggleShowModal().then(getSamples()));
+            }).then(clearSamples).then(toggleShowModal()).then(getSamples());
         } catch (err) {
             console.error(err.message);
         }
