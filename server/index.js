@@ -19,7 +19,7 @@ app.delete('/dev', async (req, res) => {
     }
 })
 
-app.get('/', async (req, res) => {
+app.get('/samples', async (req, res) => {
     try {
         const allSamples = await pool.query("SELECT samples.sample_id, users.user_name, samples.material, samples.lot, samples.quantity, samples.timestamp, samples.status FROM samples INNER JOIN users ON samples.user_id=users.user_id WHERE status='pending'");
         res.send(allSamples.rows);
