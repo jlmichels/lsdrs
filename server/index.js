@@ -1,3 +1,4 @@
+const {Client} = require('pg');
 const express = require('express');
 const app = express()
 const cors = require('cors');
@@ -10,6 +11,12 @@ app.use(bodyParser.json());
 
 /* Routes */
 
+const getClient = (req, res) => {
+    let client = new Client({
+        connectionString: process.env.DATABASE_URL
+    })
+}
+
 app.delete('/dev', async (req, res) => {
     try {
         const clearSamples = await pool.query("TRUNCATE samples");
@@ -21,7 +28,10 @@ app.delete('/dev', async (req, res) => {
 
 app.get('/samples', async (req, res) => {
     try {
-        const allSamples = await pool.query("SELECT samples.sample_id, users.user_name, samples.material, samples.lot, samples.quantity, samples.timestamp, samples.status FROM samples INNER JOIN users ON samples.user_id=users.user_id WHERE status='pending'");
+        const client = getClient();
+        client.connect();
+        let allSamples;
+        await client.query("SELECT samples.sample_id, users.user_name, samples.material, samples.lot, samples.quantity, samples.timestamp, samples.status FROM samples INNER JOIN users ON samples.user_id=users.user_id WHERE status='pending'").then(x => allSamples = x).then(() => client.end());
         res.send(allSamples.rows);
     } catch (err) {
         console.error(err.message);
