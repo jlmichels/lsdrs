@@ -23,8 +23,8 @@ const ListSamples = () => {
     }
 
     const getSamples = async() => {
-        try {
-            const res = await fetch('http://localhost:3001/samples');
+        try { // http://localhost:3001
+            const res = await fetch('/samples');
             const jsonData = await res.json();
             setSamples(jsonData);
         } catch (err) {
