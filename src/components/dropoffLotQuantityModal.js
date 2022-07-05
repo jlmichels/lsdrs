@@ -65,8 +65,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
 
     const postSample = async () => {
         try {
-            // http://localhost:3001
-            const newSample = await fetch("/samples", {
+            const newSample = await fetch("http://localhost:3001/samples", {
                 method:"POST",
                 body: JSON.stringify({
                     user_id: 1,

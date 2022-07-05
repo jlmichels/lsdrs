@@ -14,9 +14,6 @@ function App() {
   const fullWidthSpace = "　";
   const [alertText, setAlertText] = useState(fullWidthSpace);
   
-  console.log("process.env.DATABASE_URL");
-  console.log(process.env.DATABASE_URL);
-
   const handleFactory = () => {
     setShowButtons(!showButtons);
     setShowDropoffSamples(!showDropoffSamples);
