@@ -36,7 +36,8 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
             setDropoffLot(inputLot);
         } else {
             setLotErrorMaxExceeded(true);
-        }        
+        }
+        e.currentTarget.value = inputLot;
     }
 
     const handleConfirm = (e) => {
