@@ -3,7 +3,7 @@ const express = require('express');
 const app = express()
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 3001; // process.env.PORT ||
+const port = process.env.PORT || 3001;
 require('dotenv').config();
 
 app.use(cors());
@@ -12,18 +12,33 @@ app.use(bodyParser.json());
 /* Routes */
 
 const getClient = () => {
-    let client = new Client({
-        /*
-        connectionString: *******,
+
+    const connection = process.env.DATABASE_URL 
+        ? process.env.DATABASE_URL 
+        : {
+            user: process.env.DATABASE_USER,
+            host: process.env.DATABASE_HOST,
+            database: process.env.DATABASE_NAME,
+            password: process.env.DATABASE_PASSWORD,
+            port: process.env.DATABASE_PORT, 
+        }
+
+    let client = new Client(
+        connection
+        /* Heroku 
+        connectionString: process.env.DATABASE_URL,
         ssl: {
             rejectUnauthorized: false
-        }*/
+        }
+        */
+        /* Local
         user: process.env.DATABASE_USER,
         host: process.env.DATABASE_HOST,
         database: process.env.DATABASE_NAME,
         password: process.env.DATABASE_PASSWORD,
         port: process.env.DATABASE_PORT,
-    })
+        */
+    )
     return client;
 }
 
