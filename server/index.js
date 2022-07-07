@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 const getClient = () => {
 
-    const connection = process.env.DATABASE_URL 
-        ? process.env.DATABASE_URL 
+    const parsedConnectionString = process.env.DATABASE_URL 
+        ? process.env.DATABASE_URL.split("://")[0] + "ql://" + process.env.DATABASE_URL.split("://")[1] 
         : {
             user: process.env.DATABASE_USER,
             host: process.env.DATABASE_HOST,
@@ -23,8 +23,11 @@ const getClient = () => {
             port: process.env.DATABASE_PORT, 
         }
 
-    let client = new Client(
-        connection
+    let client = new Client({
+        connectionString: parsedConnectionString,
+        ssl: {
+            rejectUnauthorized: false
+        }}
         /* Heroku 
         connectionString: process.env.DATABASE_URL,
         ssl: {
@@ -63,7 +66,7 @@ app.get('/samples', async (req, res) => {
             .connect()
             .catch(err => console.error("Connection error", err.stack));
         await client.query("SELECT samples.sample_id, users.user_name, samples.material, samples.lot, samples.quantity, samples.timestamp, samples.status FROM samples INNER JOIN users ON samples.user_id=users.user_id WHERE status='pending'")
-            .then((x) => res.send(x.rows))
+            .then((x) => res.json(x.rows))
             .then(() => client.end());
     } catch (err) {
         console.error(err.message);
