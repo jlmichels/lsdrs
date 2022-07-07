@@ -24,7 +24,7 @@
     "a": "nodemon ./server/index.js",
     "b": "npm run start",
     "c": "concurrently \"npm run a\" \"npm run b\"",
-    "start": "react-scripts start",
+    "start": "node ./server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
