@@ -9,7 +9,7 @@ LSDRS is a PostgreSQL/Express/React/Node (PERN) full-stack app that enables fact
 ![Node](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
 ## Live Demo
-[LSDRS on Netlify](https://lsdrs.netlify.app/)
+[LSDRS on Heroku](https://lsdrs.herokuapp.com/)
 
 ## Technologies
 ### Front-end
