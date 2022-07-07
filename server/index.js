@@ -1,11 +1,13 @@
 const {Client} = require('pg');
 const express = require('express');
-const app = express()
+const path = require('path');
+const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
 require('dotenv').config();
 
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -154,6 +156,10 @@ app.post('/dev/repopulate', async (req, res) => {
         console.error(err.message);
     }
 })
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 app.listen(port, () => {
     console.log(`LSDRS server running on port ${port}`)
