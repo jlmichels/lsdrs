@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
 require('dotenv').config();
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.resolve(__dirname, '../build')));
 app.use(cors());
 app.use(bodyParser.json());
 
