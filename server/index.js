@@ -61,7 +61,11 @@ app.delete('/dev', async (req, res) => {
 
 app.get('/samples', async (req, res) => {
     try {
-        const client = getClient();
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+        }});
         client
             .connect()
             .catch(err => console.error("Connection error", err.stack));
