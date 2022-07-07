@@ -23,6 +23,8 @@ const getClient = () => {
             port: process.env.DATABASE_PORT, 
         }
 
+    console.log("parsed string: " + parsedConnectionString);
+
     let client = new Client({
         connectionString: parsedConnectionString,
         ssl: {
