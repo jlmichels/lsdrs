@@ -15,8 +15,13 @@ app.use(bodyParser.json());
 
 const getClient = () => {
 
-    const parsedConnectionString = process.env.DATABASE_URL 
-        ? process.env.DATABASE_URL.split("://")[0] + "ql://" + process.env.DATABASE_URL.split("://")[1] 
+    const connectionObject = process.env.DATABASE_URL 
+        ? {
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+            }
+        }
         : {
             user: process.env.DATABASE_USER,
             host: process.env.DATABASE_HOST,
@@ -25,25 +30,7 @@ const getClient = () => {
             port: process.env.DATABASE_PORT, 
         }
 
-    let client = new Client({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false
-        }}
-        /* Heroku 
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false
-        }
-        */
-        /* Local
-        user: process.env.DATABASE_USER,
-        host: process.env.DATABASE_HOST,
-        database: process.env.DATABASE_NAME,
-        password: process.env.DATABASE_PASSWORD,
-        port: process.env.DATABASE_PORT,
-        */
-    )
+    let client = new Client(connectionObject)
     return client;
 }
 
@@ -63,11 +50,7 @@ app.delete('/dev', async (req, res) => {
 
 app.get('/samples', async (req, res) => {
     try {
-        const client = new Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false
-        }});
+        const client = getClient();
         client
             .connect()
             .catch(err => console.error("Connection error", err.stack));
