@@ -41,6 +41,8 @@ LSDRS is a PostgreSQL/Express/React/Node (PERN) full-stack app that enables fact
 ## Roadmap
 - User authentication system
 - Display rejection notices to factory side
+- Implement Jest tests
+- Consider using Redux
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
