@@ -67,8 +67,8 @@ const SampleReceptionModal = ({ showModal, toggleShowModal, currentSample, clear
     }
 
     const handleStatusChange = async(status, rejectionReason) => {
-        try{ // http://localhost:3001
-            const res = fetch (`/samples/${currentSample.sample_id}`, {
+        try{
+            const res = fetch (process.env.REACT_APP_PATH_PREFIX ? process.env.REACT_APP_PATH_PREFIX + `/samples/${currentSample.sample_id}` : `/samples/${currentSample.sample_id}`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                     status: `${status}`,

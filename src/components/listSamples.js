@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import DevOptionsDropdown from './devOptionsDropdown.js';
 import SampleReceptionModal from './sampleReceptionModal.js';
 import Spinner from "react-bootstrap/Spinner";
+
 /* useEffect once buttons added */
 
 const ListSamples = () => {
@@ -23,8 +24,8 @@ const ListSamples = () => {
     }
 
     const getSamples = async() => {
-        try { // http://localhost:3001
-            const res = await fetch('/samples');
+        try {
+            const res = await fetch(process.env.REACT_APP_PATH_PREFIX ? process.env.REACT_APP_PATH_PREFIX + '/samples' : '/samples');
             const jsonData = await res.json();
             setSamples(jsonData);
         } catch (err) {

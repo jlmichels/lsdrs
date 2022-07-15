@@ -65,8 +65,8 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
     }
 
     const postSample = async () => {
-        try { // http://localhost:3001
-            const newSample = await fetch("/samples", {
+        try {
+            const newSample = await fetch(process.env.REACT_APP_PATH_PREFIX ? process.env.REACT_APP_PATH_PREFIX + '/samples' : '/samples', {
                 method:"POST",
                 body: JSON.stringify({
                     user_id: 1,
@@ -97,7 +97,7 @@ const DropoffLotQuantityModal = ({ showModal, toggleShowModal, dropoffMaterial, 
                             <tr>
                                 <td className="align-middle">Lot</td>
                                 <td>
-                                    <Form onSubmit={handleConfirm}> {/* half works; runs, but dismisses */}
+                                    <Form onSubmit={handleConfirm}>
                                         <Form.Group controlid="lotForm">
                                             <Form.Control placeholder="Enter lot number" onChange={(e) => handleLotChange(e)}/>
                                             <Form.Text className="text-muted">

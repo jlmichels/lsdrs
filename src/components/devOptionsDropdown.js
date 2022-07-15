@@ -4,8 +4,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 const DevOptionsDropdown = () => {
 
     const resetStatuses = async() => {
-        try { // http://localhost:3001
-            const res = await fetch('/samples/all/1', {
+        try {
+            const res = await fetch(process.env.REACT_APP_PATH_PREFIX ? process.env.REACT_APP_PATH_PREFIX + '/samples/all/1' : '/samples/all/1', {
                 method: 'PATCH',
                 body: JSON.stringify({
                     status: 'pending',
@@ -20,8 +20,8 @@ const DevOptionsDropdown = () => {
     }
 
     const clearSamples = async() => {
-        try { // http://localhost:3001
-            const res = await fetch('/dev', {
+        try {
+            const res = await fetch(process.env.REACT_APP_PATH_PREFIX ? process.env.REACT_APP_PATH_PREFIX + '/dev' : '/dev', {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -33,8 +33,8 @@ const DevOptionsDropdown = () => {
     }
 
     const repopulateSamples = async() => {
-        try { // http://localhost:3001
-            const res = await fetch('/dev/repopulate', {
+        try {
+            const res = await fetch(process.env.REACT_APP_PATH_PREFIX ? process.env.REACT_APP_PATH_PREFIX + '/dev/repopulate' : '/dev/repopulate', {
                 method: 'POST'
             })
         } catch (err) {

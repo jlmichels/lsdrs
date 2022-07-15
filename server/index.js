@@ -23,11 +23,8 @@ const getClient = () => {
             }
         }
         : {
-            user: process.env.DATABASE_USER,
-            host: process.env.DATABASE_HOST,
-            database: process.env.DATABASE_NAME,
-            password: process.env.DATABASE_PASSWORD,
-            port: process.env.DATABASE_PORT, 
+            connectionString: process.env.REACT_APP_DATABASE_URL_LOCAL,
+            ssl: false
         }
 
     let client = new Client(connectionObject)

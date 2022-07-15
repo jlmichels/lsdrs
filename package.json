@@ -23,7 +23,8 @@
   "scripts": {
     "a": "nodemon ./server/index.js",
     "b": "npm run start",
-    "c": "concurrently \"npm run a\" \"npm run b\"",
+    "c": "concurrently \"npm run a\" \"npm run d\"",
+    "d": "set PORT=3000 && react-scripts start",
     "start": "node ./server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
