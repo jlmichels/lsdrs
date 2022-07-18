@@ -31,3 +31,7 @@ input {
 #homeButton:hover {
   cursor: pointer;
 }
+
+.navButton:hover, .navButton:active {
+  background: #585858;
+}

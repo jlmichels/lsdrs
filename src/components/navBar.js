@@ -10,8 +10,8 @@ const NavBar = ( { handleHome, handleDropoff, handleReception } ) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link onClick={() => handleDropoff()}>Drop-off</Nav.Link>
-            <Nav.Link onClick={() => handleReception()}>Reception</Nav.Link>
+            <Nav.Link className="navButton" onClick={() => handleDropoff()}>Drop-off</Nav.Link>
+            <Nav.Link className="navButton" onClick={() => handleReception()}>Reception</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
