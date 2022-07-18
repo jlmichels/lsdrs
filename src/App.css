@@ -1,3 +1,7 @@
+* {
+  background: #fefefe;
+}
+
 .App {
   text-align: center;
 }
@@ -13,4 +17,16 @@ form, label {
 
 input {
   margin: auto;
+}
+
+#materialContainer {
+  margin: auto;
+  width: 400px;
+}
+
+@media screen and (max-width: 360px) {
+  #materialContainer {
+    margin: auto;
+    width: 75%;
+  }
 }

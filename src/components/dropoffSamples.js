@@ -26,11 +26,13 @@ const DropoffSamples = ( { handleNewSample }) => {
     return(
         <Fragment>
             Select Material
-            <div className="d-flex justify-content-center flex-wrap">
-                {materials.map((material) => (
-                    /* Deselect button after modal close */
-                    <Button key={material} variant="outline-primary" size="lg" onClick={() => handleOnClick(material)}>{material}</Button>    
-                ))}
+            <div id="materialContainer">
+                <div className="d-flex justify-content-center flex-wrap">
+                    {materials.map((material) => (
+                        /* Deselect button after modal close */
+                        <Button key={material} variant="outline-primary" size="lg" className="m-4" onClick={() => handleOnClick(material)}>{material}</Button>    
+                    ))}
+                </div>
             </div>
             <DropoffLotQuantityModal showModal={showModal} toggleShowModal={toggleShowModal} dropoffMaterial={dropoffMaterial} handleNewSample={handleNewSample}/>
         </Fragment>
