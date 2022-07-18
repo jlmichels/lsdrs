@@ -5,6 +5,7 @@ import DropoffSamples from './components/dropoffSamples';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Fade from 'react-bootstrap/Fade';
+import NavBar from './components/navBar.js';
 
 function App() {
   const [showButtons, setShowButtons] = useState(true);
@@ -14,14 +15,21 @@ function App() {
   const fullWidthSpace = "　";
   const [alertText, setAlertText] = useState(fullWidthSpace);
   
-  const handleFactory = () => {
-    setShowButtons(!showButtons);
-    setShowDropoffSamples(!showDropoffSamples);
+  const handleHome = () => {
+    setShowButtons(true);
+    setShowDropoffSamples(false);
+    setShowListSamples(false);
   }
 
-  const handleLaboratory = () => {
-    setShowButtons(!showButtons);
-    setShowListSamples(!showListSamples);
+  const handleDropoff = () => {
+    setShowButtons(false);
+    setShowDropoffSamples(true);
+    setShowListSamples(false);
+  }
+  const handleReception = () => {
+    setShowButtons(false);
+    setShowDropoffSamples(false);
+    setShowListSamples(true);
   }
 
   const handleNewSample = (text) => {
@@ -31,20 +39,21 @@ function App() {
 
     setTimeout(() => {
       setAlertVariant("light");
+      /* Keep alert space filled, but empty; "" collapses alert space. */
       setAlertText(fullWidthSpace);
     }, 2000)
   }
 
   return (
     <div className="App">
+      <NavBar handleHome={handleHome} handleDropoff={handleDropoff} handleReception={handleReception}/>
       <Alert key="sampleDroppoffAccepted" variant={alertVariant} transition={Fade}>{alertText}</Alert>
       <header className="App-header">
-        <h1>LSDRS</h1>
         <h6 className="mb-4">Laboratory Sample Drop-off/Reception System</h6>
       </header>
       <div className="d-grid gap-2">
-        {showButtons ? <Button size="lg" onClick={handleFactory}>Factory</Button> : ""}
-        {showButtons ? <Button size="lg" onClick={handleLaboratory}>Laboratory</Button> : ""}
+        {showButtons ? <Button size="lg" onClick={handleDropoff}>Drop-off</Button> : ""}
+        {showButtons ? <Button size="lg" onClick={handleReception}>Reception</Button> : ""}
       </div>
       {showListSamples ? <ListSamples/> : ""}
       {showDropoffSamples ? <DropoffSamples handleNewSample={handleNewSample}/> : ""}

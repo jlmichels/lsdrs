@@ -1,0 +1,22 @@
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+//expand="lg"   fixed="top"
+const NavBar = ( { handleHome, handleDropoff, handleReception } ) => {
+  return (
+    <Navbar bg="light">
+      <Container>
+        <Navbar.Brand href="" onClick={() => handleHome()}>LSDRS</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link onClick={() => handleDropoff()}>Drop-off</Nav.Link>
+            <Nav.Link onClick={() => handleReception()}>Reception</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
+
+export default NavBar;
