@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const NavBar = ( { handleHome, handleDropoff, handleReception } ) => {
   return (
-    <Navbar bg="light">
+    <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="" onClick={() => handleHome()}>LSDRS</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
