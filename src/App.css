@@ -27,3 +27,7 @@ input {
     width: 75%;
   }
 }
+
+#homeButton:hover {
+  cursor: pointer;
+}
