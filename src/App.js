@@ -52,8 +52,8 @@ function App() {
         <h6 className="mb-4">Laboratory Sample Drop-off/Reception System</h6>
       </header>
       <div className="d-grid gap-2">
-        {showButtons ? <Button size="lg" onClick={handleDropoff}>Drop-off</Button> : ""}
-        {showButtons ? <Button size="lg" onClick={handleReception}>Reception</Button> : ""}
+        {showButtons ? <Button size="lg" className="mt-5" onClick={handleDropoff}>Drop-off</Button> : ""}
+        {showButtons ? <Button size="lg" className="mt-5" onClick={handleReception}>Reception</Button> : ""}
       </div>
       {showListSamples ? <ListSamples/> : ""}
       {showDropoffSamples ? <DropoffSamples handleNewSample={handleNewSample}/> : ""}
